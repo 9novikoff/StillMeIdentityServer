@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 namespace StillMeIdentityServer
 {
@@ -12,7 +9,8 @@ namespace StillMeIdentityServer
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme);
+            builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+
             builder.Services.AddAuthorizationBuilder();
 
             builder.Services.AddDbContext<IdentityDbContext>(options => 
